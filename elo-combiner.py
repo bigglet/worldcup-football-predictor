@@ -86,8 +86,28 @@ def build_csv(x,name):		#convert list of lists to a csv file
 			writer.writerow(r)
 
 def split_and_save_data(x,y):
+	l = len(x)
+	x_train = []
+	y_train = []
+	
+	x_test = []
+	y_test = []
+	for i in range(l):
+		if(i < 0.8*l):
+			x_train.append(x[i])
+			y_train.append(x[i])
+		else:
+			x_test.append(x[i])
+			y_test.append(x[i])
+			
 	build_csv(x,'x')
 	build_csv(y,'y')
+
+	build_csv(x_train, 'x_train')
+	build_csv(y_train, 'y_train')
+	
+	build_csv(x_test, 'x_test')
+	build_csv(y_test, 'y_test')
 
 def main():
 	elo, teams_2018, home_team_list, away_team_list, year_list, home_score_list, away_score_list = load_data()
