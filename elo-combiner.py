@@ -72,10 +72,22 @@ def load_data():
 	home_team_list, away_team_list, year_list, home_score_list, away_score_list = load_matches(teams_2018, elo)
 	return elo, teams_2018, home_team_list, away_team_list, year_list, home_score_list, away_score_list
 
-def build csv():
+def build_csv(x,name):		#convert list of lists to a csv file
 	#split dataset into 80/20 for train/test
-	with open('x_train', 'wb') as f:
+	print x[0]
+
+	with open(name+'.csv', 'wb') as f:
 		#write to csv
+		writer = csv.writer(f)
+		for i in range(len(x[0])):
+			r = []
+			for j in range(len(x)):
+				r.append(x[j][i])
+			writer.writerow(r)
+
+def split_and_save_data(x,y):
+	build_csv(x,'x')
+	build_csv(y,'y')
 
 def main():
 	elo, teams_2018, home_team_list, away_team_list, year_list, home_score_list, away_score_list = load_data()
@@ -87,15 +99,20 @@ def main():
 	x = []
 	x.append(home_team_list)
 	x.append(away_team_list)
-	x.append(year_list)
 	x.append(home_elo)
 	x.append(away_elo)
+	x.append(year_list)
 
 	y = []
 	y.append(home_score_list)
 	y.append(away_score_list)
 
-	build_csv()
+	print x, y
+	print 'Press Enter to Save to CSV!'
+	raw_input()
+	
+	split_and_save_data(x,y)
+
 
 	print len(home_elo)
 	print len(away_elo)
