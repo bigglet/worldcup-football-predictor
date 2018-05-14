@@ -74,9 +74,11 @@ def load_data():
 
 def build_csv(x,name):		#convert list of lists to a csv file
 	#split dataset into 80/20 for train/test
-	print x[0]
+	print x
+	print len(x), len(x[0])
+	raw_input(name)
 
-	with open(name+'.csv', 'wb') as f:
+	with open('data-standard/'+name+'.csv', 'wb') as f:
 		#write to csv
 		writer = csv.writer(f)
 		for i in range(len(x[0])):
@@ -86,20 +88,23 @@ def build_csv(x,name):		#convert list of lists to a csv file
 			writer.writerow(r)
 
 def split_and_save_data(x,y):
-	l = len(x)
+	l = len(x[0])
+
+
 	x_train = []
 	y_train = []
-	
+
 	x_test = []
 	y_test = []
-	for i in range(l):
-		if(i < 0.8*l):
-			x_train.append(x[i])
-			y_train.append(x[i])
-		else:
-			x_test.append(x[i])
-			y_test.append(x[i])
-			
+
+	for i in range( len(x) ):
+		x_train.append( x[i][0:int(0.8*l)] )
+		x_test.append( x[i][int(0.8*l):l] )
+
+	for i in range( len(y) ):
+		y_train.append( y[i][0:int(0.8*l)] )
+		y_test.append( y[i][int(0.8*l):l] )
+
 	build_csv(x,'x')
 	build_csv(y,'y')
 
