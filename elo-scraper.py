@@ -10,6 +10,7 @@ def get_web_data(url):
 def scrape(start_year,end_year,teams):
 	years = {}
 	for year in range(start_year,end_year+1):
+		print year
 		url = 'http://www.eloratings.net/'+str(year)+'.tsv'
 		data = get_web_data(url)
 		
@@ -29,6 +30,7 @@ def save(elo):
 		pickle.dump(elo,f)
 	with open('elo.pckl', 'rb') as f:
 		dic = pickle.load(f)
+	print("Finished saving data")
 
 def get_teams():
 	url = 'http://www.eloratings.net/en.teams.tsv'
@@ -46,8 +48,8 @@ def get_teams():
 def main():
 	teams = get_teams()
 	elo = scrape(1901,2018, teams)
-	save(elo)
-	print("Finished saving data")
+	#save(elo)
+
 
 if __name__ == '__main__':
 	main()
