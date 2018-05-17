@@ -27,6 +27,9 @@ def load_matches(teams_2018, elo):
 		away_score_list = []
 		year_list = []
 		winner_list = []
+		is_friendly_list = []
+		is_worldcup_list = []
+
 		reader = csv.reader(f)
 		for row in reader:
 			home_team = row[1]
@@ -34,6 +37,8 @@ def load_matches(teams_2018, elo):
 			
 			home_score = row[3]
 			away_score = row[4]
+
+			match_type = row[5]
 
 			winner = calculate_winner(home_score, away_score)
 
@@ -55,6 +60,17 @@ def load_matches(teams_2018, elo):
 					away_score_list.append(away_score)
 					year_list.append(year)
 					winner_list.append(winner)
+					
+					if(match_type == 'Friendly'):
+						is_friendly_list.append(1)
+					else:
+						is_friendly_list.append(0)
+			
+					if(match_type == 'FIFA World Cup'):
+						is_worldcup_list.append(1)
+					else:
+						is_worldcup_list.append(0)
+
 					for t in range(len(teams_2018)):
 						if (home_team == teams_2018[t]) or (away_team == teams_2018[t]):
 							team_count[t] += 1
@@ -62,7 +78,7 @@ def load_matches(teams_2018, elo):
 					print "No ELO for the team in this year"
 
 			#check here if there is one of the teams which has changed names i.e West Germany - Germany, USSR - Russia
-	return home_team_list, away_team_list, year_list, home_score_list, away_score_list, winner_list
+	return home_team_list, away_team_list, year_list, home_score_list, away_score_list, winner_list, is_friendly_list, is_worldcup_list
 
 def calculate_winner(home_score, away_score):
 	if(home_score > away_score):
@@ -81,8 +97,8 @@ def get_elo(team_list, elo, year_list):
 def load_data():
 	elo = load_elo()
 	teams_2018 = load_teams()
-	home_team_list, away_team_list, year_list, home_score_list, away_score_list, winner_list = load_matches(teams_2018, elo)
-	return elo, teams_2018, home_team_list, away_team_list, year_list, home_score_list, away_score_list, winner_list
+	home_team_list, away_team_list, year_list, home_score_list, away_score_list, winner_list, is_friendly_list, is_worldcup_list = load_matches(teams_2018, elo)
+	return elo, teams_2018, home_team_list, away_team_list, year_list, home_score_list, away_score_list, winner_list, is_friendly_list, is_worldcup_list
 
 def build_csv(x,name):		#convert list of lists to a csv file
 	#split dataset into 80/20 for train/test
@@ -127,7 +143,7 @@ def split_and_save_data(x,y):
 	build_csv(y_test, 'y_test')
 
 def main():
-	elo, teams_2018, home_team_list, away_team_list, year_list, home_score_list, away_score_list, winner_list = load_data()
+	elo, teams_2018, home_team_list, away_team_list, year_list, home_score_list, away_score_list, winner_list, is_friendly_list, is_worldcup_list = load_data()
 
 	home_elo = get_elo(home_team_list, elo, year_list)
 	away_elo = get_elo(away_team_list, elo, year_list)
@@ -139,10 +155,12 @@ def main():
 	x.append(home_elo)
 	x.append(away_elo)
 	x.append(year_list)
+	x.append(is_friendly_list)
+	x.append(is_worldcup_list)
 
 	y = []
-	y.append(home_score_list)
-	y.append(away_score_list)
+	#y.append(home_score_list)
+	#y.append(away_score_list)
 	y.append(winner_list)
 
 	print x, y
