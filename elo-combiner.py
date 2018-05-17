@@ -126,12 +126,18 @@ def split_and_save_data(x,y):
 	y_test = []
 
 	for i in range( len(x) ):
-		x_train.append( x[i][0:int(0.8*l)] )
-		x_test.append( x[i][int(0.8*l):l] )
+		#x_train.append( x[i][0:int(0.8*l)] )
+		#x_test.append( x[i][int(0.8*l):l] )
+		x_train.append( x[i][0:3143] )
+		x_test.append( x[i][3143:3165] )
+		
 
 	for i in range( len(y) ):
-		y_train.append( y[i][0:int(0.8*l)] )
-		y_test.append( y[i][int(0.8*l):l] )
+		#y_train.append( y[i][0:int(0.8*l)] )
+		#y_test.append( y[i][int(0.8*l):l] )
+
+		y_train.append( y[i][0:3143] )
+		y_test.append( y[i][3143:3165] )
 
 	build_csv(x,'x')
 	build_csv(y,'y')
