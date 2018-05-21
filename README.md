@@ -2,9 +2,9 @@
 
 Welcome to the worldcup predictor, containing all the data needed for predicting the 2018 world cup scores. The tournament will work as follows:
 1. Use the dataset provided to either:
-..- Train a model for prediction
-..- Test heuristic algorithms on predicting the winner of games (e.g. highest-elo.py)
-..- Or just look at it and make your own csv of who you think will win
+  - Train a model for prediction
+  - Test heuristic algorithms on predicting the winner of games (e.g. highest-elo.py)
+  - Or just look at it and make your own csv of who you think will win
 2. Use your method from above to output a .csv file for the worldcup group games predicted by your model.
 3. Repeat stage (2) after the group stages with the second provided list of games
 
