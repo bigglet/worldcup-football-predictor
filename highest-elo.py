@@ -2,13 +2,13 @@ import csv
 
 #Read data from csv files
 x_test = []
-with open('data-standard/x_test.csv','rb') as csvfile:
+with open('data-custom/x_test.csv','rb') as csvfile:
 	reader = csv.reader(csvfile)
 	for row in reader:
 		x_test.append(row)
 
 y_test = []
-with open('data-standard/y_test.csv','rb') as csvfile:
+with open('data-custom/y_test.csv','rb') as csvfile:
 	reader = csv.reader(csvfile)
 	for row in reader:
 		y_test.append(row)
