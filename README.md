@@ -31,6 +31,8 @@ And the output Y will be as follows:
 
 The possible values are, 1 for a home win, 0 for a draw and -1 for a home loss.
 
+It is worth noting that at the worldcup there aren't any real home teams (except Russia this year) but every game has one team assigned to the home team.
+
 ---
 
 ## Running the examples
