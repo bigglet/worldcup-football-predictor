@@ -37,6 +37,8 @@ It is worth noting that at the worldcup there aren't any real home teams (except
 
 ## Running the examples
 
+Sadly this is all running on `Python 2.7`
+
 Running the scripts. To run all the scipts, make sure you have `scikitlearn`, `numpy` and `pickle` installed. Once these have been installed check that the scripts work by running:
 ```bash
   python dataset-maker.py
