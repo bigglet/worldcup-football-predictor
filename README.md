@@ -33,6 +33,8 @@ The possible values are, 1 for a home win, 0 for a draw and -1 for a home loss.
 
 ---
 
+## Running the examples
+
 Running the scripts. To run all the scipts, make sure you have `scikitlearn`, `numpy` and `pickle installed`. Once these have been installed check that the scripts work by running:
 ```bash
   python dataset-maker.py
@@ -42,3 +44,7 @@ and decide whether you want to test on a 80/20 split OR the 2018 worldcup. Then 
   python models-simple.py
 ```
 and see what accuracy these simple models obtain.
+
+Dataset maker will let you choose between the 80/20 or world cup data, and save the files to data-custom, otherwise feel free just to use the data-standard 2014 world cup dataset.
+
+You can edit any of the data as you wish.
