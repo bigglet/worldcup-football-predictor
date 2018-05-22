@@ -39,7 +39,7 @@ Running the scripts. To run all the scipts, make sure you have `scikitlearn`, `n
 ```bash
   python dataset-maker.py
 ```
-and decide whether you want to test on a 80/20 split OR the 2018 worldcup. Then run:
+and decide whether you want to test on a 80/20 split OR the 2014 worldcup. Then run:
 ```bash
   python models-simple.py
 ```
