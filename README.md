@@ -16,7 +16,7 @@ Scores will be allocated as following:
 
 ---
 
-# The Data
+## The Data
 The data is output as two csv files, x and y. X is the input data and looks as follows:
 
 Home Team | Away Team | Home Team Elo | Away Team Elo | Year | Friendly (Y/N) | Worldcup (Y/N)
@@ -35,7 +35,7 @@ The possible values are, 1 for a home win, 0 for a draw and -1 for a home loss.
 
 ## Running the examples
 
-Running the scripts. To run all the scipts, make sure you have `scikitlearn`, `numpy` and `pickle installed`. Once these have been installed check that the scripts work by running:
+Running the scripts. To run all the scipts, make sure you have `scikitlearn`, `numpy` and `pickle` installed. Once these have been installed check that the scripts work by running:
 ```bash
   python dataset-maker.py
 ```
