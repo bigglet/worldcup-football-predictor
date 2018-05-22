@@ -48,8 +48,7 @@ with open('data-custom/y_train.csv','rb') as csvfile:
 rf = RandomForestClassifier(random_state=0)
 rf.fit(x_train, y_train.ravel())
 
-print rf.score(x_test, y_test.ravel())
-
+print 'RandomForestClassifier: ', rf.score(x_test, y_test.ravel())
 
 x_test = normalize(x_test.astype(float))
 y_test = normalize(y_test.astype(float))
@@ -59,4 +58,14 @@ y_train = normalize(y_train.astype(float))
 lr = LogisticRegression(multi_class='multinomial',solver='newton-cg')
 lr.fit(x_train,y_train.ravel())
 
-print lr.score(x_test, y_test.ravel())
+lr_score = lr.score(x_test, y_test.ravel())
+print "LogisticRegression: ", lr_score
+
+lr_predict = lr.predict(x_test)
+
+#save logistic score
+with open('model-predict.csv', 'wb') as csvfile:
+    writer = csv.writer(csvfile, delimiter=' ')
+    for i in range(lr_predict.size):
+        print int(lr_predict[i])
+        writer.writerow( str(int( lr_predict[i] ) ) )
