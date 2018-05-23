@@ -39,17 +39,18 @@ def load_matches(teams_2018, elo):
 
             match_type = row[5]
 
-            winner = calculate_winner(home_score, away_score)
-            if(home_team == 'Korea Republic'):
-                home_team = 'South Korea'
-                team_count[8] += 1
-            if(away_team == 'Korea Republic'):
-                away_team = 'South Korea'
-                team_count[8] += 1
-            year = row[0][6:10]
+	    winner = calculate_winner(home_score, away_score)
+	    year = row[0][6:10]
 
             if( any( home_team in t for t in teams_2018 ) and any( away_team in t for t in teams_2018 ) ):
                 try:
+		    if(home_team == 'Korea Republic'):
+			home_team = 'South Korea'
+			team_count[8] += 1
+		    if(away_team == 'Korea Republic'):
+			away_team = 'South Korea'
+			team_count[8] += 1
+	 
                     print(elo[int(year)][home_team]) #HERE
                     print(elo[int(year)][away_team]) #HERE
                     home_team_list.append(home_team)
