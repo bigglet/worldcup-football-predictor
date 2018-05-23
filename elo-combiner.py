@@ -4,9 +4,6 @@ import csv
 def load_elo():
 	with open('elo.pckl', 'rb') as f:
 		elo = pickle.load(f)	#open elo ratings derived from the scraping website
-		print elo
-		print type(elo)
-
 	return elo
 
 def load_teams():
@@ -15,7 +12,6 @@ def load_teams():
 		r = csv.reader(f)
 		for row in r:
 			teams.append(row[0])
-		print teams
 	return teams
 
 def load_matches(teams_2018, elo):
@@ -42,18 +38,18 @@ def load_matches(teams_2018, elo):
 
 			winner = calculate_winner(home_score, away_score)
 
-			if(home_team == 'Korea Republic'):
-				home_team = 'South Korea'
-				team_count[8] += 1
-			if(away_team == 'Korea Republic'):
-				away_team = 'South Korea'
-				team_count[8] += 1
 			year = row[0][6:10]
 
 			if( any( home_team in t for t in teams_2018 ) and any( away_team in t for t in teams_2018 ) ):
 				try:
-					print(elo[int(year)][home_team]) #HERE
-					print(elo[int(year)][away_team]) #HERE
+					if(home_team == 'Korea Republic'):
+						home_team = 'South Korea'
+						team_count[8] += 1
+					if(away_team == 'Korea Republic'):
+						away_team = 'South Korea'
+						team_count[8] += 1				
+					test = (elo[int(year)][home_team]) #HERE
+					test = (elo[int(year)][away_team]) #HERE
 					home_team_list.append(home_team)
 					away_team_list.append(away_team)
 					home_score_list.append(home_score)
@@ -75,7 +71,8 @@ def load_matches(teams_2018, elo):
 						if (home_team == teams_2018[t]) or (away_team == teams_2018[t]):
 							team_count[t] += 1
 				except:
-					print "No ELO for the team in this year"
+					#print "No ELO for the team in this year"
+					pass
 
 			#check here if there is one of the teams which has changed names i.e West Germany - Germany, USSR - Russia
 	return home_team_list, away_team_list, year_list, home_score_list, away_score_list, winner_list, is_friendly_list, is_worldcup_list
@@ -102,10 +99,6 @@ def load_data():
 
 def build_csv(x,name):		#convert list of lists to a csv file
 	#split dataset into 80/20 for train/test
-	print x
-	print len(x), len(x[0])
-	raw_input(name)
-
 	with open('data-standard/'+name+'.csv', 'wb') as f:
 		#write to csv
 		writer = csv.writer(f)
@@ -117,7 +110,6 @@ def build_csv(x,name):		#convert list of lists to a csv file
 
 def split_and_save_data(x,y):
 	l = len(x[0])
-
 
 	x_train = []
 	y_train = []
@@ -169,23 +161,13 @@ def main():
 	#y.append(away_score_list)
 	y.append(winner_list)
 
-	print x, y
-	print 'Press Enter to Save to CSV!'
-	raw_input()
+	print 'Dataset size: ', len(x[0])
+
+	print 'ELO score matched to historic data'
 	
 	split_and_save_data(x,y)
-
-
-	print len(home_elo)
-	print len(away_elo)
-
-	print len(year_list)
-
-	print len(home_team_list)
-	print len(away_team_list)
-
-	print len(home_score_list)
-	print len(home_score_list)
+	
+	print('Saved to csv.')
 
 if __name__ == '__main__':
 	main()
