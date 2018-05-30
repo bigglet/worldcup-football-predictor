@@ -29,16 +29,19 @@ def get_all_elo(t, elo):
 	return team_elo
 
 def main():
-	teams = load_teams()
-	elo = load_elo()
-	for t in teams:
-		team_elo = np.array(get_all_elo(t, elo))
-		std_elo = np.std(team_elo)
-		try:
-			mean_elo = elo[2018][t]
-		except:
-			mean_elo = np.mean(team_elo)
-		
+    teams = load_teams()
+    elo = load_elo()
+    print teams
+    for t in teams:
+        team_elo = np.array(get_all_elo(t, elo)).astype(np.float)
+        std_elo = np.std(team_elo)
+        try:
+            mean_elo = elo[2018][t]
+        except:
+            mean_elo = np.mean(team_elo)
+        print t, mean_elo, std_elo
+        #create a dictionary for teams to norm params
+    
 
 if __name__ == '__main__':
 	main()
