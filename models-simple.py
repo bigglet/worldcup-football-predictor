@@ -67,5 +67,4 @@ lr_predict = lr.predict(x_test)
 with open('model-predict.csv', 'wb') as csvfile:
     writer = csv.writer(csvfile, delimiter=' ')
     for i in range(lr_predict.size):
-        print int(lr_predict[i])
         writer.writerow( str(int( lr_predict[i] ) ) )
