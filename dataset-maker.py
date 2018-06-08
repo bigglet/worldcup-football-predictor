@@ -29,6 +29,10 @@ def load_matches(teams_2018, elo):
         is_friendly_list = []
         is_worldcup_list = []
 
+        while True:
+            dataset_choice = raw_input("1 - > World Cup Teams Data\n2 - > ALL Teams\n\n")
+            if(dataset_choice in options):
+                break
         reader = csv.reader(f)
         for row in reader:
             home_team = row[1]
@@ -39,10 +43,14 @@ def load_matches(teams_2018, elo):
 
             match_type = row[5]
 
-	    winner = calculate_winner(home_score, away_score)
-	    year = row[0][6:10]
+            winner = calculate_winner(home_score, away_score)
+            year = row[0][6:10]
+            if(dataset_choice == '1'):
+                check = any( home_team in t for t in teams_2018 ) and any( away_team in t for t in teams_2018 ) and home_team != 'Niger' and away_team != 'Niger' 
+            else:
+                check = True
 
-            if( any( home_team in t for t in teams_2018 ) and any( away_team in t for t in teams_2018 ) and home_team != 'Niger' and away_team != 'Niger' ):
+            if( check ):
                 try:
                     if(home_team == 'Korea Republic'):
                         home_team = 'South Korea'
